@@ -1,12 +1,11 @@
 import '../styles/main.scss';
 import { createStore } from 'redux'
 
-function counter (state = 0, action) {
+function counter (state = [], action) {
     switch(action.type) {
-        case "INCREMENT":
-            return state + 1
-        case "DECREMENT": 
-            return state -1
+        case "ADD":
+            state.push("ok");
+            return state;
         default: 
             return state
     }
@@ -15,9 +14,9 @@ function counter (state = 0, action) {
 let store = createStore(counter);
 
 store.subscribe(() => {
+
 document.querySelector(".container").innerHTML = store.getState();
     }
 )
 
-
-setInterval(() => { store.dispatch({type: "INCREMENT"}); },2000)
+setInterval(() => { store.dispatch({type: "ADD"}); },2000)
