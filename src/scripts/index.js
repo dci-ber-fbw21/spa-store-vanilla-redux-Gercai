@@ -1,11 +1,16 @@
 import '../styles/main.scss';
 import { createStore } from 'redux'
 
-function counter (state = [], action) {
+function counter (state = {
+    count: [],
+    force: false
+}, action) {
     switch(action.type) {
+        case "FORCE":
+            state.force = true;            
         case "ADD":
-            state.push("ok");
-            return state;
+            state.count.push("ok");
+            return {...state};            
         default: 
             return state
             }
@@ -13,15 +18,28 @@ function counter (state = [], action) {
 
 let store = createStore(counter);
 
-document.querySelector(".container").innerHTML = "no Items";
+document.querySelector(".counter").innerHTML = "no Items";
+ 
+function addSomething (){
+    store.dispatch({type: "FORCE"});
+}
 
+document.querySelector("button").addEventListener("click",addSomething);
+ 
 store.subscribe(() => {
 
-   if(store.getState().length <6){
-    document.querySelector(".container").innerHTML = store.getState();
+
+    if(store.getState().count.length === 5){
+        clearInterval(interval);
+        }        
+
+    if(store.getState().count.length <6 
+   || store.getState().force === true
+   && store.getState().count.length <=10){
+    document.querySelector(".counter").innerHTML = store.getState().count;
 }}
 )
   
 store.dispatch({type:"ADD"}); 
 
-setInterval(() => { store.dispatch({type: "ADD"}); },2000)
+let interval = setInterval(() => { store.dispatch({type: "ADD"}); },2000)
