@@ -8,15 +8,20 @@ function counter (state = [], action) {
             return state;
         default: 
             return state
-    }
+            }
 }
 
 let store = createStore(counter);
 
+document.querySelector(".container").innerHTML = "no Items";
+
 store.subscribe(() => {
 
-document.querySelector(".container").innerHTML = store.getState();
-    }
+   if(store.getState().length <6){
+    document.querySelector(".container").innerHTML = store.getState();
+}}
 )
+  
+store.dispatch({type:"ADD"}); 
 
 setInterval(() => { store.dispatch({type: "ADD"}); },2000)
