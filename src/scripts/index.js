@@ -1,7 +1,23 @@
-// The following line makes sure your styles are included in the project. Don't remove this.
 import '../styles/main.scss';
-// Import any additional modules you want to include below \/
+import { createStore } from 'redux'
+
+function counter (state = 0, action) {
+    switch(action.type) {
+        case "INCREMENT":
+            return state + 1
+        case "DECREMENT": 
+            return state -1
+        default: 
+            return state
+    }
+}
+
+let store = createStore(counter);
+
+store.subscribe(() => {
+document.querySelector(".container").innerHTML = store.getState();
+    }
+)
 
 
-// \/ All of your javascript should go here \/
-
+setInterval(() => { store.dispatch({type: "INCREMENT"}); },2000)
