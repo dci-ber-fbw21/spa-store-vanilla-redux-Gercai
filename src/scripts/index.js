@@ -5,6 +5,7 @@ import {FORCE,ADD} from "./check";
 
 let store = createStore(counter);
 
+
 store.subscribe(() => {
     if(store.getState().items.length === 5){
         clearInterval(interval);
@@ -20,6 +21,7 @@ store.subscribe(() => {
 document.querySelector(".items").innerHTML = "no Items";
 document.querySelector("button").addEventListener("click",addSomething);
 
+console.log("testing for github");
 store.dispatch({type:ADD}); 
 
 // functions
