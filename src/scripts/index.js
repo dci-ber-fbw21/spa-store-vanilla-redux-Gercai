@@ -12,7 +12,7 @@ store.subscribe(() => {
     if(store.getState().items.length <6 
         || store.getState().force === true
         && store.getState().items.length <=10){
-        document.querySelector(".count").innerHTML = store.getState().count;
+        document.querySelector(".count").innerHTML = store.getState().items.length;
         document.querySelector(".items").innerHTML = store.getState().items.join("");
     }}
 )
