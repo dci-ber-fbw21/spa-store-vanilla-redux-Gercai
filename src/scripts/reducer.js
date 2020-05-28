@@ -2,16 +2,19 @@ let faker = require('faker');
 import { createStore } from 'redux';
 
 
-export function counter (state = {
-    items: [],
-    force: false
-}, action) {
+export function counter (
+    state = {
+      items: [],
+      force: false
+}, action) 
+{
     switch(action.type) {
         case "FORCE":
             state.force = true;            
         case "ADD":
-            state.items.push("<li>" + faker.fake("{{lorem.word}}" + "</li>"));
-            return {...state};             
+            // state.items.push("<li>" + faker.fake("{{lorem.word}}" + "</li>"));
+            return {...state,
+                items: [...state.items, action.payload.text]};             
         default: 
             return {...state};
             }
