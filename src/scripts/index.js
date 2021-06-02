@@ -1,7 +1,7 @@
 import '../styles/main.scss';
 import { createStore } from 'redux';
 import {counter} from "./reducer";
-import {FORCE,ADD} from "./check";
+//import {FORCE,ADD} from "./check";
 let faker = require('faker');
 
 let store = createStore(counter);
